@@ -35,6 +35,9 @@ create table Registration(
     DeliverDate date not null
 );
 
+alter table Registration add constraint sfzh foreign key (PersonID) references Owner(PersonID);
+alter table Registration add constraint fcbn foreign key (EstateID) references Estate(EstateID);
+
 
 #（3）准备样本数据， 编写并运行SQL语句，在上述3个数据库表中添加数据。
 # 该步操作正常应该使用insert语句，但实际使用excel另存为csv格式进行插入表
@@ -87,3 +90,5 @@ create view Sale as select e.EstateID,e.EstateCity,e.EstateType,r.Price,r.Purcha
 from Estate as e join Registration as r on e.EstateID = r.EstateID
 where e.EstateCity = '住宅' and r.PurchasedDate between 2018-01-01 and 2018-12-31
 group by e.EstateCity
+
+
